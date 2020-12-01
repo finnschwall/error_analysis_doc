@@ -1,0 +1,1785 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>error_analysis.evar API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>error_analysis.evar</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import sympy
+import matplotlib.pyplot as plt
+import weakref
+import numpy as np
+from varname import varname
+from error_analysis import options, tools
+
+class ErrorMode(enumerate):
+    &#34;&#34;&#34;
+    All available modes for getting errors
+    &#34;&#34;&#34;
+    GAUSS = 0
+    &#34;&#34;&#34;only gauss error&#34;&#34;&#34;
+    MAX = 1
+    # only max error
+    BOTH = 2
+    # both at the same time
+    COMBINED = 3
+    # combined to one error with sigma= sqrt(gauss^2+max^2)
+    NONE = 4
+    # no errors
+
+
+# TODO check for circular expression and either add warning or fix
+# TODO add support for units
+class evar:
+    &#34;&#34;&#34;
+    Data type which supports error propagation
+    &#34;&#34;&#34;
+    var_dic = dict()
+    dic_id = 0
+
+    def __init__(self, value=None, gauss_error=None, max_error=None, name=None, unit=None):
+        &#34;&#34;&#34;
+        Creates new instance of a variable. All non-set variables are assumed to be 0.
+
+        :param value: The value/s of the variable. Can be list or single value
+        :param gauss_error: error which is propagated by gaussian estimation. If value is list but this is not,
+        :param max_error: error which is propagated by maximum error estimation.
+        :param name: Display name in everything string related. Can be latex style
+        :param unit: not implemented yet
+        &#34;&#34;&#34;
+        # keep track of all involved variables
+        # it should be tested if this is really faster than iterating over all existing variables
+
+        if unit is not None:
+            # add unit support for operands.
+            print(&#34;thats not finished yet&#34;)
+
+        if name == &#34;INT_OP&#34;:
+            self.name = &#34;unknown&#34;
+            self.__id = -1
+            self.has_gauss_error = True
+            self.has_max_error = True
+        else:
+            self.__dependencies = set()
+            self.__id = evar.dic_id
+            self.__dependencies.add(self.__id)
+
+            evar.dic_id += 1
+            # to ensure correct garbage collection
+            evar.var_dic[self.__id] = weakref.ref(self)
+
+            self.symbol = sympy.symbols(&#34;v&#34; + str(self.__id) + &#34;v&#34;, real=True)
+            self.g_symbol = sympy.symbols(&#34;g&#34; + str(self.__id) + &#34;g&#34;, real=True)
+            self.m_symbol = sympy.symbols(&#34;m&#34; + str(self.__id) + &#34;m&#34;, real=True)
+            self.__expr = self.symbol
+            self.__shadow_expr = self.__expr
+            self.__shadow_dependencies = self.__dependencies
+            self.has_gauss_error = True
+            self.has_max_error = True
+            # value of var init
+            if value is None:
+                self.is_list = False
+                self.value = 0
+                self.length = 1
+            else:
+                if (type(value) is list) or (type(value) is np.ndarray):
+                    self.is_list = True
+                    self.length = len(value)
+                    self.value = np.array(value)
+                else:
+                    self.is_list = False
+                    self.length = 1
+                    self.value = value
+            # gaussian error init
+            if gauss_error is None:
+                self.has_gauss_error = False
+                if self.length == 1:
+                    self.gauss_error = 0
+                else:
+                    self.gauss_error = np.zeros(self.length)
+            else:
+                if type(gauss_error) == list:
+                    self.gauss_error = np.array(gauss_error)
+                else:
+                    if self.length == 1:
+                        self.gauss_error = gauss_error
+                    else:
+                        self.gauss_error = np.full(self.length, gauss_error)
+
+            # maximum error init
+            if max_error is None:
+                self.has_max_error = False
+                if self.length == 1:
+                    self.max_error = 0
+                else:
+                    self.max_error = np.zeros(self.length)
+            else:
+                if type(max_error) == list:
+                    self.max_error = max_error
+                else:
+                    if self.length == 1:
+                        self.max_error = max_error
+                    else:
+                        self.max_error = np.full(self.length, max_error)
+
+            # set name
+            if name is None:
+                self.name = str(varname(raise_exc=False))
+                # format accordingly e.g. E_g to E_{g}
+            else:
+                self.name = name
+
+    def get_expr(self, as_latex=None, with_name=True):
+        &#34;&#34;&#34;
+        Gets expression (equation) of this variable
+
+        :param as_latex: wether to make this latex ready or more readable for console. Default is defined by options
+        :param with_name: wether to add name in front
+        :return: expression as string
+        &#34;&#34;&#34;
+        as_latex = options.as_latex if as_latex is None else as_latex
+        expr, dependencies = self.__get_expr()
+        if options.simplify_eqs:
+            expr = sympy.simplify(expr)
+        expr = self.__replace_ids(sympy.latex(expr)) if as_latex else self.__replace_ids(str(expr))
+        if with_name:
+            expr = self.name + &#34; = &#34; + expr
+        return expr
+
+    def get_error(self, error_mode=None, error_vars=None, as_latex=None, with_name=True):
+        &#34;&#34;&#34;
+        Get error/s equation/s as strings
+
+        :param error_mode: Which error type you want to retrieve. See ErrorMode
+        :param error_vars: Errors will be calculated only in respect to these. Standard is every variable that has error
+        :param as_latex: wether to print latex style
+        :param with_name: wether to print error name in front
+        :return: error equation/s as string
+        &#34;&#34;&#34;
+        error_mode = options.error_mode if error_mode is None else error_mode
+        if error_mode == ErrorMode.NONE:
+            return &#34;&#34;
+        if error_mode == ErrorMode.BOTH:
+            return self.get_error(ErrorMode.GAUSS, error_vars, as_latex, with_name) + &#34;\n&#34; + \
+                   self.get_error(ErrorMode.MAX, error_vars, as_latex, with_name)
+        if error_mode == ErrorMode.COMBINED:
+            raise Exception(&#34;this makes no sense here&#34;)
+        if as_latex is None:
+            as_latex = options.as_latex
+        expr, dependencies = self.__get_expr()
+        if error_vars is None:
+            error_vars = []
+            for i in dependencies:
+                entry = evar.var_dic[i]()
+                if entry.has_gauss_error and error_mode == 0:
+                    error_vars.append(entry)
+                if entry.has_max_error and error_mode == 1:
+                    error_vars.append(entry)
+        err = None
+        if error_mode == 0:
+            err = tools.get_gauss_expr(expr, error_vars)
+        else:
+            err = tools.get_max_expr(expr, error_vars)
+        if options.simplify_eqs:
+            err = sympy.simplify(err)
+        err = self.__replace_ids(sympy.latex(err)) if as_latex else self.__replace_ids(
+            str(err))
+        if with_name:
+            if error_mode == ErrorMode.MAX:
+                err = r&#34;\sigma_{&#34; + options.max_error_name + &#34;_{&#34; + self.name + &#34;}}&#34; + &#34; = &#34; + err
+            if error_mode == ErrorMode.GAUSS:
+                err = r&#34;\sigma_{&#34; + options.gauss_error_name + &#34;_{&#34; + self.name + &#34;}}&#34; + &#34; = &#34; + err
+        return err
+
+    def get_gauss_error(self, error_vars=None, as_latex=None, with_name=True):
+        &#34;&#34;&#34;
+        calls get_error with ErrorMode.GAUSS
+
+        :param error_vars: see get_error
+        :param as_latex: see get_error
+        :param with_name: see get_error
+        :return: see get_error
+        &#34;&#34;&#34;
+        return self.get_error(ErrorMode.GAUSS, error_vars, as_latex, with_name)
+
+    def get_max_error(self, error_vars=None, as_latex=None, with_name=True):
+        return self.get_error(ErrorMode.MAX, error_vars, as_latex, with_name)
+
+    # TODO add support for options.error_mode
+    # TODO use proper functions
+    def show(self, font_size=12):
+        &#34;&#34;&#34;
+        Shows screen with all equations and values
+
+        :param font_size: font size of everything
+        &#34;&#34;&#34;
+        text = &#34;&#34;
+        text += &#34;$&#34; + self.get_expr(as_latex=True) + &#34;$\n&#34;
+        text += &#34;$&#34; + self.get_gauss_error(as_latex=True) + &#34;$\n&#34;
+        text += &#34;$&#34; + self.get_max_error(as_latex=True) + &#34;$\n&#34;
+        t_str = self.get_value_str(as_latex=True)
+        t_str = t_str.replace(&#34;\n&#34;, &#34;$\n$&#34;)
+        text += &#34;$&#34; + t_str + &#34;$&#34;
+        plt.text(0, 0.1, text, fontsize=font_size)
+        plt.axis(&#34;off&#34;)
+        plt.show()
+
+    def get_combined_error(self):
+        &#34;&#34;&#34;
+        Combines errors by assuming errors are independet
+
+        :return: combined error
+        &#34;&#34;&#34;
+        return np.sqrt(self.gauss_error ** 2 + self.max_error ** 2)
+
+    def __str__(self):
+        &#34;&#34;&#34;
+        Calls get_value_str
+
+        :return: formatted string
+        &#34;&#34;&#34;
+        return self.get_value_str()
+
+    # TODO less lazy version that runs faster
+    # TODO fix non scientific version
+    def get_value_str(self, error_mode=None, as_latex=None, no_rounding=None, scientific=True):
+        &#34;&#34;&#34;
+        Get value or values of instance formatted
+
+        :param error_mode: See ErrorMode
+        :param as_latex: See options
+        :param no_rounding: See options
+        :param scientific: wether to format in scientific notation or not
+        :return: formatted string
+        &#34;&#34;&#34;
+        no_rounding = options.no_rounding if no_rounding is None else no_rounding
+        as_latex = options.as_latex if as_latex is None else as_latex
+        error_mode = options.error_mode if error_mode is None else error_mode
+        pm = &#34; \pm &#34; if as_latex else &#34; +- &#34;
+        times = &#34;\cdot &#34; if as_latex else &#34;* &#34;
+        if self.length == 1:
+            a, b, c, d = 0, 0, 0, 0
+            first_error = self.get_combined_error() if error_mode == ErrorMode.COMBINED else self.gauss_error
+            if scientific:
+                a, b, c, d = tools.transform_to_sig(self.value, first_error, self.max_error, no_rounding)
+            else:
+                a, b, c, d = tools.transform_to_sig(self.value, first_error, self.max_error, no_rounding)
+                a *= 10 ** d
+                b *= 10 ** d
+                c *= 10 ** d
+            dec_exp = &#34;&#34;
+            if d == 0:
+                pass
+            elif d == 1:
+                dec_exp = times + &#34;10&#34;
+            else:
+                dec_exp = times + &#34;10^{&#34; + str(d) + &#34;}&#34;
+
+            error_str = &#34;&#34;
+            if error_mode == ErrorMode.NONE:
+                return self.name + &#34; = &#34; + str(a) + &#34; &#34; + dec_exp
+            elif error_mode == ErrorMode.BOTH:
+                error_str = pm + str(b) + pm + str(c)
+            elif error_mode == ErrorMode.MAX:
+                error_str = pm + str(c)
+            elif error_mode == ErrorMode.GAUSS:
+                error_str = pm + str(b)
+            elif error_mode == ErrorMode.COMBINED:
+                error_str = pm + str(b)
+            return self.name + &#34; = (&#34; + str(a) + error_str + &#34;) &#34; + dec_exp
+
+        else:
+            string = &#34;&#34;
+            for i in range(self.length):
+                string += self[i].get_value_str(error_mode, as_latex, no_rounding, scientific) + &#34;\n&#34;
+            return string[:-1]
+
+    # TODO should return equations in align etc
+    def to_str(self, print_values=False, print_expr=False, print_gauss_error=False, print_max_error=False,
+               print_all=False, as_latex=options.as_latex):
+        &#34;&#34;&#34;
+        UNFINISHED. Do not use
+
+        :param print_values:
+        :param print_expr:
+        :param print_gauss_error:
+        :param print_max_error:
+        :param print_all:
+        :param as_latex:
+        :return:
+        &#34;&#34;&#34;
+        ret_str = &#34;&#34;
+        if print_values == False and print_expr == False and print_gauss_error == False and print_max_error == False and print_all == False:
+            ret_str = self.name
+        if print_all:
+            print_values = True
+            print_expr = True
+            print_gauss_error = True
+            print_max_error = True
+        if print_values:
+            ret_str += self.get_value_str(as_latex)
+            if print_gauss_error or print_max_error or print_expr:
+                ret_str += &#34;\n&#34;
+        if print_expr:
+            ret_str += self.name + &#34;=&#34; + self.get_expr(as_latex)
+            if print_gauss_error or print_max_error:
+                ret_str += &#34;\n&#34;
+        if print_gauss_error:
+            ret_str += r&#34;\sigma_{&#34; + options.gauss_error_name + &#34;_{&#34; + self.name + &#34;}}&#34; + &#34;=&#34; + self.get_gauss_error(
+                as_latex=as_latex)
+            if print_max_error:
+                ret_str += &#34;\n&#34;
+        if print_max_error:
+            ret_str += r&#34;\sigma_{&#34; + options.max_error_name + &#34;_{&#34; + self.name + &#34;}}&#34; + &#34;=&#34; + self.get_max_error(
+                as_latex=as_latex)
+        return ret_str
+
+    def __getitem__(self, key):
+        &#34;&#34;&#34;
+        Return i&#39;th variable or sliced variable.
+
+        :param key: index or slice
+        :return: i&#39;th variable if instance is list. otherwise returns value key=0, sig key=1, max key=2
+        &#34;&#34;&#34;
+        if self.length &gt; 1:
+            name = &#34;&#34;
+            if type(key) is int:
+                name = self.name + &#34;_{&#34; + str(key) + &#34;}&#34;
+            else:
+                name = self.name
+            return evar(self.value[key], self.gauss_error[key], self.max_error[key], name)
+
+        else:
+            if key == 0:
+                return self.value
+            elif key == 1:
+                return self.gauss_error
+            elif key == 2:
+                return self.max_error
+            else:
+                raise IndexError(&#34;list index out of range&#34;)
+
+    # TODO add check for correlations. sig_stat(x-x+d) e.g. should  just be sig_stat(d)
+    # operators
+    def __finish_operation(self):
+        if type(self.value) is np.ndarray:
+            self.length = len(self.value)
+            if np.count_nonzero(self.gauss_error) &gt; 0:
+                self.has_gauss_error = True
+            else:
+                self.has_gauss_error = False
+            if np.count_nonzero(self.max_error) &gt; 0:
+                self.has_max_error = True
+            else:
+                self.has_max_error = False
+        else:
+            self.length = 1
+            if self.gauss_error == 0:
+                self.has_gauss_error = False
+            else:
+                self.has_gauss_error = True
+            if self.max_error == 0:
+                self.has_max_error = False
+            else:
+                self.has_max_error = True
+
+    # TODO implement iadd isub imul itruediv completely
+    # + and -
+    # +
+    def __add__(self, other):
+        RET_VAR = evar(name=&#34;INT_OP&#34;)
+        if type(other) == evar:
+            RET_VAR.value = self.value + other.value
+            RET_VAR.gauss_error = np.sqrt(self.gauss_error ** 2 + other.gauss_error ** 2)
+            RET_VAR.max_error = np.abs(self.max_error) + np.abs(other.max_error)
+            RET_VAR.__expr = self.__expr + other.__expr
+            RET_VAR.__dependencies = other.__dependencies | self.__dependencies
+        else:
+            RET_VAR.value = self.value + other
+            RET_VAR.gauss_error = self.gauss_error
+            RET_VAR.max_error = self.max_error
+            RET_VAR.__expr = self.__expr + other
+            RET_VAR.__dependencies = self.__dependencies
+        RET_VAR.__finish_operation()
+        return RET_VAR
+
+    def __radd__(self, other):
+        return self + other
+
+    def __iadd__(self, other):
+        if type(other) == evar:
+            raise NotImplementedError(&#34;Currently only supported with numbers or lists but not evar&#34;)
+        else:
+            self.value += other
+            self.__expr += other
+            return self
+
+    # -
+    def __sub__(self, other):
+        RET_VAR = evar(name=&#34;INT_OP&#34;)
+        if type(other) == evar:
+            RET_VAR.value = self.value - other.value
+            RET_VAR.gauss_error = np.sqrt(self.gauss_error ** 2 + other.gauss_error ** 2)
+            RET_VAR.max_error = np.abs(self.max_error) + np.abs(other.max_error)
+            RET_VAR.__expr = self.__expr - other.__expr
+            RET_VAR.__dependencies = other.__dependencies | self.__dependencies
+        else:
+            RET_VAR.value = self.value - other
+            RET_VAR.gauss_error = self.gauss_error
+            RET_VAR.max_error = self.max_error
+            RET_VAR.__expr = self.__expr - other
+            RET_VAR.__dependencies = self.__dependencies
+        RET_VAR.__finish_operation()
+        return RET_VAR
+
+    # TODO make this less lazy and more efficient
+    def __rsub__(self, other):
+        return -self + other
+
+    def __isub__(self, other):
+        if type(other) == evar:
+            raise NotImplementedError(&#34;Currently only supported with numbers or lists but not evar&#34;)
+        else:
+            self.value -= other
+            self.__expr -= other
+            return self
+
+    def __neg__(self):
+        RET_VAR = evar(name=&#34;INT_OP&#34;)
+        RET_VAR.value = -self.value
+        RET_VAR.gauss_error = self.gauss_error
+        RET_VAR.max_error = self.max_error
+        RET_VAR.__expr = -self.__expr
+        RET_VAR.__dependencies = self.__dependencies
+        RET_VAR.__finish_operation()
+        return RET_VAR
+
+    # * and /
+    # *
+    def __mul__(self, other):
+        RET_VAR = evar(name=&#34;INT_OP&#34;)
+        if type(other) == evar:
+            RET_VAR.value = self.value * other.value
+            RET_VAR.gauss_error = np.sqrt((other.gauss_error * self.value) ** 2 + (other.value * self.gauss_error) ** 2)
+            RET_VAR.max_error = np.abs(other.max_error * self.value) + np.abs(self.max_error * other.value)
+            RET_VAR.__expr = self.__expr * other.__expr
+            RET_VAR.__dependencies = other.__dependencies | self.__dependencies
+        else:
+            RET_VAR.value = self.value * other
+            RET_VAR.gauss_error = self.gauss_error * other
+            RET_VAR.max_error = self.max_error * other
+            RET_VAR.__expr = self.__expr * other
+            RET_VAR.__dependencies = self.__dependencies
+        RET_VAR.__finish_operation()
+        return RET_VAR
+
+    def __rmul__(self, other):
+        return self * other
+
+    def __imul__(self, other):
+        if type(other) == evar:
+            raise NotImplementedError(&#34;Currently only supported with numbers or lists but not evar&#34;)
+        else:
+            self.max_error *= abs(other)
+            self.gauss_error *= abs(other)
+            self.value *= other
+            self.__expr *= other
+            return self
+
+    # /
+
+    def __truediv__(self, other):
+        RET_VAR = evar(name=&#34;INT_OP&#34;)
+        if type(other) == evar:
+            RET_VAR.value = self.value / other.value
+            RET_VAR.gauss_error = np.sqrt(
+                (other.gauss_error * self.value) ** 2 + (other.value * self.gauss_error) ** 2) / (other.value ** 2)
+            RET_VAR.max_error = np.abs(other.max_error * self.value / other.value ** 2) + np.abs(
+                self.max_error / other.value)
+            RET_VAR.__expr = self.__expr / other.__expr
+            RET_VAR.__dependencies = other.__dependencies | self.__dependencies
+        else:
+            RET_VAR.value = self.value / other
+            RET_VAR.gauss_error = self.gauss_error / other
+            RET_VAR.max_error = np.abs(self.max_error / other)
+            RET_VAR.__expr = self.__expr / other
+            RET_VAR.__dependencies = self.__dependencies
+        RET_VAR.__finish_operation()
+        return RET_VAR
+
+    def __rtruediv__(self, other):
+        RET_VAR = evar(name=&#34;INT_OP&#34;)
+        RET_VAR.value = other / self.value
+        RET_VAR.gauss_error = other * np.abs(self.gauss_error) / self.value ** 2
+        RET_VAR.max_error = other * np.abs(self.max_error / self.value ** 2)
+        RET_VAR.__expr = other / self.__expr
+        RET_VAR.__dependencies = self.__dependencies
+        RET_VAR.__finish_operation()
+        return RET_VAR
+
+    def __itruediv__(self, other):
+        if type(other) == evar:
+            raise NotImplementedError(&#34;Currently only supported with numbers or lists but not evar&#34;)
+        else:
+            self.max_error /= abs(other)
+            self.gauss_error /= abs(other)
+            self.value /= other
+            self.__expr /= other
+            return self
+
+    # ^
+    def __pow__(self, other):
+        RET_VAR = evar(name=&#34;INT_OP&#34;)
+        if type(other) == evar:
+            RET_VAR.value = self.value ** other.value
+            inner = (self.gauss_error * other.value) ** 2 + (other.gauss_error * self.value * np.log(self.value)) ** 2
+            RET_VAR.gauss_error = np.sqrt(inner * self.value ** (2 * other.value - 2))
+            RET_VAR.max_error = np.abs(self.max_error * other.value * self.value ** (other.value - 1)) + np.abs(
+                other.max_error * np.log(self.value) * self.value ** other.value)
+            RET_VAR.__expr = self.__expr ** other.__expr
+            RET_VAR.__dependencies = other.__dependencies | self.__dependencies
+        else:
+            RET_VAR.value = self.value ** other
+            RET_VAR.gauss_error = np.sqrt(self.value ** (2 * other - 2)) * np.abs(self.gauss_error * other)
+            RET_VAR.max_error = np.abs(self.max_error * other * self.value ** (other - 1))
+            RET_VAR.__expr = self.__expr ** other
+            RET_VAR.__dependencies = self.__dependencies
+        RET_VAR.__finish_operation()
+        return RET_VAR
+
+    def __rpow__(self, other):
+        # other**self
+        RET_VAR = evar(name=&#34;INT_OP&#34;)
+        RET_VAR.value = other ** self.value
+        RET_VAR.gauss_error = np.abs(self.gauss_error) * np.log(other) * other ** self.value
+        RET_VAR.max_error = np.abs(self.max_error) * np.log(other) * other ** self.value
+        RET_VAR.__expr = other ** self.__expr
+        RET_VAR.__dependencies = self.__dependencies
+        RET_VAR.__finish_operation()
+        return RET_VAR
+
+    def __ipow__(self, other):
+        if type(other) == evar:
+            raise NotImplementedError(&#34;Currently only supported with numbers or lists but not evar&#34;)
+        else:
+            self.value **= other
+            self.gauss_error = np.abs(self.gauss_error) * np.log(other) * other ** self.value
+            self.max_error = np.abs(self.max_error) * np.log(other) * other ** self.value
+            self.__expr **= other
+            return self
+
+    def __del__(self):
+        if self.__id != -1:
+            del self.symbol
+            del self.m_symbol
+            del self.g_symbol
+            del evar.var_dic[self.__id]
+
+    def set_name(self, name):
+        &#34;&#34;&#34;
+        Sets name for this variable and also makes it a &#34;real&#34; variable.
+        Using it in equations will now longer give expression of defining equation of this variable
+
+        :param name: the new name for the variable
+        &#34;&#34;&#34;
+        if self.__id == -1:
+            self.__shadow_expr = self.__expr
+            self.__shadow_dependencies = self.__dependencies
+            self.__id = evar.dic_id
+            self.__dependencies = {self.__id}
+            evar.dic_id += 1
+            evar.var_dic[self.__id] = weakref.ref(self)
+            self.symbol = sympy.symbols(&#34;v&#34; + str(self.__id) + &#34;v&#34;)
+            self.g_symbol = sympy.symbols(&#34;g&#34; + str(self.__id) + &#34;g&#34;)
+            self.m_symbol = sympy.symbols(&#34;m&#34; + str(self.__id) + &#34;m&#34;)
+            self.__expr = self.symbol
+            self.name = name
+            self.__finish_operation()
+        else:
+            self.name = name
+
+    def to_variable(self, name):
+        &#34;&#34;&#34;
+        Same as set_name. Exists for backwards compatability
+        :param name: new name of this instance
+        :return:
+        &#34;&#34;&#34;
+        self.set_name(name)
+
+    def __get_expr(self):
+        if self.__id == -1:
+            if options.simplify_eqs:
+                return sympy.simplify(self.__expr), self.__dependencies
+            else:
+                return self.__expr, self.__dependencies
+        else:
+            if options.simplify_eqs:
+                return sympy.simplify(self.__shadow_expr), self.__shadow_dependencies
+            else:
+                return self.__shadow_expr, self.__shadow_dependencies
+
+    def __replace_ids(self, string):
+        temp_str = string
+        expr, dependencies = self.__get_expr()
+        for i in dependencies:
+            num = i
+            temp_str = temp_str.replace(&#34;v&#34; + str(num) + &#34;v&#34;, evar.var_dic[num]().name)
+            temp_str = temp_str.replace(&#34;g&#34; + str(num) + &#34;g&#34;,
+                                        r&#34;\sigma_{&#34; + options.gauss_error_name + &#34;_{&#34; + evar.var_dic[
+                                            i]().name + &#34;}}&#34;)
+            temp_str = temp_str.replace(&#34;m&#34; + str(num) + &#34;m&#34;,
+                                        r&#34;\sigma_{&#34; + options.max_error_name + &#34;_{&#34; + evar.var_dic[i]().name + &#34;}}&#34;)
+        return temp_str
+
+
+def Variable(a=None, b=None, c=None, d=None):
+    &#34;&#34;&#34;
+    This exists solely for backwards compatibility
+    &#34;&#34;&#34;
+    return evar(a, b, c, d)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="error_analysis.evar.Variable"><code class="name flex">
+<span>def <span class="ident">Variable</span></span>(<span>a=None, b=None, c=None, d=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This exists solely for backwards compatibility</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Variable(a=None, b=None, c=None, d=None):
+    &#34;&#34;&#34;
+    This exists solely for backwards compatibility
+    &#34;&#34;&#34;
+    return evar(a, b, c, d)</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="error_analysis.evar.ErrorMode"><code class="flex name class">
+<span>class <span class="ident">ErrorMode</span></span>
+<span>(</span><span>iterable, start=0)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>All available modes for getting errors</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ErrorMode(enumerate):
+    &#34;&#34;&#34;
+    All available modes for getting errors
+    &#34;&#34;&#34;
+    GAUSS = 0
+    &#34;&#34;&#34;only gauss error&#34;&#34;&#34;
+    MAX = 1
+    # only max error
+    BOTH = 2
+    # both at the same time
+    COMBINED = 3
+    # combined to one error with sigma= sqrt(gauss^2+max^2)
+    NONE = 4</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.enumerate</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="error_analysis.evar.ErrorMode.BOTH"><code class="name">var <span class="ident">BOTH</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="error_analysis.evar.ErrorMode.COMBINED"><code class="name">var <span class="ident">COMBINED</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="error_analysis.evar.ErrorMode.GAUSS"><code class="name">var <span class="ident">GAUSS</span></code></dt>
+<dd>
+<div class="desc"><p>only gauss error</p></div>
+</dd>
+<dt id="error_analysis.evar.ErrorMode.MAX"><code class="name">var <span class="ident">MAX</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="error_analysis.evar.ErrorMode.NONE"><code class="name">var <span class="ident">NONE</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="error_analysis.evar.evar"><code class="flex name class">
+<span>class <span class="ident">evar</span></span>
+<span>(</span><span>value=None, gauss_error=None, max_error=None, name=None, unit=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Data type which supports error propagation</p>
+<p>Creates new instance of a variable. All non-set variables are assumed to be 0.</p>
+<p>:param value: The value/s of the variable. Can be list or single value
+:param gauss_error: error which is propagated by gaussian estimation. If value is list but this is not,
+:param max_error: error which is propagated by maximum error estimation.
+:param name: Display name in everything string related. Can be latex style
+:param unit: not implemented yet</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class evar:
+    &#34;&#34;&#34;
+    Data type which supports error propagation
+    &#34;&#34;&#34;
+    var_dic = dict()
+    dic_id = 0
+
+    def __init__(self, value=None, gauss_error=None, max_error=None, name=None, unit=None):
+        &#34;&#34;&#34;
+        Creates new instance of a variable. All non-set variables are assumed to be 0.
+
+        :param value: The value/s of the variable. Can be list or single value
+        :param gauss_error: error which is propagated by gaussian estimation. If value is list but this is not,
+        :param max_error: error which is propagated by maximum error estimation.
+        :param name: Display name in everything string related. Can be latex style
+        :param unit: not implemented yet
+        &#34;&#34;&#34;
+        # keep track of all involved variables
+        # it should be tested if this is really faster than iterating over all existing variables
+
+        if unit is not None:
+            # add unit support for operands.
+            print(&#34;thats not finished yet&#34;)
+
+        if name == &#34;INT_OP&#34;:
+            self.name = &#34;unknown&#34;
+            self.__id = -1
+            self.has_gauss_error = True
+            self.has_max_error = True
+        else:
+            self.__dependencies = set()
+            self.__id = evar.dic_id
+            self.__dependencies.add(self.__id)
+
+            evar.dic_id += 1
+            # to ensure correct garbage collection
+            evar.var_dic[self.__id] = weakref.ref(self)
+
+            self.symbol = sympy.symbols(&#34;v&#34; + str(self.__id) + &#34;v&#34;, real=True)
+            self.g_symbol = sympy.symbols(&#34;g&#34; + str(self.__id) + &#34;g&#34;, real=True)
+            self.m_symbol = sympy.symbols(&#34;m&#34; + str(self.__id) + &#34;m&#34;, real=True)
+            self.__expr = self.symbol
+            self.__shadow_expr = self.__expr
+            self.__shadow_dependencies = self.__dependencies
+            self.has_gauss_error = True
+            self.has_max_error = True
+            # value of var init
+            if value is None:
+                self.is_list = False
+                self.value = 0
+                self.length = 1
+            else:
+                if (type(value) is list) or (type(value) is np.ndarray):
+                    self.is_list = True
+                    self.length = len(value)
+                    self.value = np.array(value)
+                else:
+                    self.is_list = False
+                    self.length = 1
+                    self.value = value
+            # gaussian error init
+            if gauss_error is None:
+                self.has_gauss_error = False
+                if self.length == 1:
+                    self.gauss_error = 0
+                else:
+                    self.gauss_error = np.zeros(self.length)
+            else:
+                if type(gauss_error) == list:
+                    self.gauss_error = np.array(gauss_error)
+                else:
+                    if self.length == 1:
+                        self.gauss_error = gauss_error
+                    else:
+                        self.gauss_error = np.full(self.length, gauss_error)
+
+            # maximum error init
+            if max_error is None:
+                self.has_max_error = False
+                if self.length == 1:
+                    self.max_error = 0
+                else:
+                    self.max_error = np.zeros(self.length)
+            else:
+                if type(max_error) == list:
+                    self.max_error = max_error
+                else:
+                    if self.length == 1:
+                        self.max_error = max_error
+                    else:
+                        self.max_error = np.full(self.length, max_error)
+
+            # set name
+            if name is None:
+                self.name = str(varname(raise_exc=False))
+                # format accordingly e.g. E_g to E_{g}
+            else:
+                self.name = name
+
+    def get_expr(self, as_latex=None, with_name=True):
+        &#34;&#34;&#34;
+        Gets expression (equation) of this variable
+
+        :param as_latex: wether to make this latex ready or more readable for console. Default is defined by options
+        :param with_name: wether to add name in front
+        :return: expression as string
+        &#34;&#34;&#34;
+        as_latex = options.as_latex if as_latex is None else as_latex
+        expr, dependencies = self.__get_expr()
+        if options.simplify_eqs:
+            expr = sympy.simplify(expr)
+        expr = self.__replace_ids(sympy.latex(expr)) if as_latex else self.__replace_ids(str(expr))
+        if with_name:
+            expr = self.name + &#34; = &#34; + expr
+        return expr
+
+    def get_error(self, error_mode=None, error_vars=None, as_latex=None, with_name=True):
+        &#34;&#34;&#34;
+        Get error/s equation/s as strings
+
+        :param error_mode: Which error type you want to retrieve. See ErrorMode
+        :param error_vars: Errors will be calculated only in respect to these. Standard is every variable that has error
+        :param as_latex: wether to print latex style
+        :param with_name: wether to print error name in front
+        :return: error equation/s as string
+        &#34;&#34;&#34;
+        error_mode = options.error_mode if error_mode is None else error_mode
+        if error_mode == ErrorMode.NONE:
+            return &#34;&#34;
+        if error_mode == ErrorMode.BOTH:
+            return self.get_error(ErrorMode.GAUSS, error_vars, as_latex, with_name) + &#34;\n&#34; + \
+                   self.get_error(ErrorMode.MAX, error_vars, as_latex, with_name)
+        if error_mode == ErrorMode.COMBINED:
+            raise Exception(&#34;this makes no sense here&#34;)
+        if as_latex is None:
+            as_latex = options.as_latex
+        expr, dependencies = self.__get_expr()
+        if error_vars is None:
+            error_vars = []
+            for i in dependencies:
+                entry = evar.var_dic[i]()
+                if entry.has_gauss_error and error_mode == 0:
+                    error_vars.append(entry)
+                if entry.has_max_error and error_mode == 1:
+                    error_vars.append(entry)
+        err = None
+        if error_mode == 0:
+            err = tools.get_gauss_expr(expr, error_vars)
+        else:
+            err = tools.get_max_expr(expr, error_vars)
+        if options.simplify_eqs:
+            err = sympy.simplify(err)
+        err = self.__replace_ids(sympy.latex(err)) if as_latex else self.__replace_ids(
+            str(err))
+        if with_name:
+            if error_mode == ErrorMode.MAX:
+                err = r&#34;\sigma_{&#34; + options.max_error_name + &#34;_{&#34; + self.name + &#34;}}&#34; + &#34; = &#34; + err
+            if error_mode == ErrorMode.GAUSS:
+                err = r&#34;\sigma_{&#34; + options.gauss_error_name + &#34;_{&#34; + self.name + &#34;}}&#34; + &#34; = &#34; + err
+        return err
+
+    def get_gauss_error(self, error_vars=None, as_latex=None, with_name=True):
+        &#34;&#34;&#34;
+        calls get_error with ErrorMode.GAUSS
+
+        :param error_vars: see get_error
+        :param as_latex: see get_error
+        :param with_name: see get_error
+        :return: see get_error
+        &#34;&#34;&#34;
+        return self.get_error(ErrorMode.GAUSS, error_vars, as_latex, with_name)
+
+    def get_max_error(self, error_vars=None, as_latex=None, with_name=True):
+        return self.get_error(ErrorMode.MAX, error_vars, as_latex, with_name)
+
+    # TODO add support for options.error_mode
+    # TODO use proper functions
+    def show(self, font_size=12):
+        &#34;&#34;&#34;
+        Shows screen with all equations and values
+
+        :param font_size: font size of everything
+        &#34;&#34;&#34;
+        text = &#34;&#34;
+        text += &#34;$&#34; + self.get_expr(as_latex=True) + &#34;$\n&#34;
+        text += &#34;$&#34; + self.get_gauss_error(as_latex=True) + &#34;$\n&#34;
+        text += &#34;$&#34; + self.get_max_error(as_latex=True) + &#34;$\n&#34;
+        t_str = self.get_value_str(as_latex=True)
+        t_str = t_str.replace(&#34;\n&#34;, &#34;$\n$&#34;)
+        text += &#34;$&#34; + t_str + &#34;$&#34;
+        plt.text(0, 0.1, text, fontsize=font_size)
+        plt.axis(&#34;off&#34;)
+        plt.show()
+
+    def get_combined_error(self):
+        &#34;&#34;&#34;
+        Combines errors by assuming errors are independet
+
+        :return: combined error
+        &#34;&#34;&#34;
+        return np.sqrt(self.gauss_error ** 2 + self.max_error ** 2)
+
+    def __str__(self):
+        &#34;&#34;&#34;
+        Calls get_value_str
+
+        :return: formatted string
+        &#34;&#34;&#34;
+        return self.get_value_str()
+
+    # TODO less lazy version that runs faster
+    # TODO fix non scientific version
+    def get_value_str(self, error_mode=None, as_latex=None, no_rounding=None, scientific=True):
+        &#34;&#34;&#34;
+        Get value or values of instance formatted
+
+        :param error_mode: See ErrorMode
+        :param as_latex: See options
+        :param no_rounding: See options
+        :param scientific: wether to format in scientific notation or not
+        :return: formatted string
+        &#34;&#34;&#34;
+        no_rounding = options.no_rounding if no_rounding is None else no_rounding
+        as_latex = options.as_latex if as_latex is None else as_latex
+        error_mode = options.error_mode if error_mode is None else error_mode
+        pm = &#34; \pm &#34; if as_latex else &#34; +- &#34;
+        times = &#34;\cdot &#34; if as_latex else &#34;* &#34;
+        if self.length == 1:
+            a, b, c, d = 0, 0, 0, 0
+            first_error = self.get_combined_error() if error_mode == ErrorMode.COMBINED else self.gauss_error
+            if scientific:
+                a, b, c, d = tools.transform_to_sig(self.value, first_error, self.max_error, no_rounding)
+            else:
+                a, b, c, d = tools.transform_to_sig(self.value, first_error, self.max_error, no_rounding)
+                a *= 10 ** d
+                b *= 10 ** d
+                c *= 10 ** d
+            dec_exp = &#34;&#34;
+            if d == 0:
+                pass
+            elif d == 1:
+                dec_exp = times + &#34;10&#34;
+            else:
+                dec_exp = times + &#34;10^{&#34; + str(d) + &#34;}&#34;
+
+            error_str = &#34;&#34;
+            if error_mode == ErrorMode.NONE:
+                return self.name + &#34; = &#34; + str(a) + &#34; &#34; + dec_exp
+            elif error_mode == ErrorMode.BOTH:
+                error_str = pm + str(b) + pm + str(c)
+            elif error_mode == ErrorMode.MAX:
+                error_str = pm + str(c)
+            elif error_mode == ErrorMode.GAUSS:
+                error_str = pm + str(b)
+            elif error_mode == ErrorMode.COMBINED:
+                error_str = pm + str(b)
+            return self.name + &#34; = (&#34; + str(a) + error_str + &#34;) &#34; + dec_exp
+
+        else:
+            string = &#34;&#34;
+            for i in range(self.length):
+                string += self[i].get_value_str(error_mode, as_latex, no_rounding, scientific) + &#34;\n&#34;
+            return string[:-1]
+
+    # TODO should return equations in align etc
+    def to_str(self, print_values=False, print_expr=False, print_gauss_error=False, print_max_error=False,
+               print_all=False, as_latex=options.as_latex):
+        &#34;&#34;&#34;
+        UNFINISHED. Do not use
+
+        :param print_values:
+        :param print_expr:
+        :param print_gauss_error:
+        :param print_max_error:
+        :param print_all:
+        :param as_latex:
+        :return:
+        &#34;&#34;&#34;
+        ret_str = &#34;&#34;
+        if print_values == False and print_expr == False and print_gauss_error == False and print_max_error == False and print_all == False:
+            ret_str = self.name
+        if print_all:
+            print_values = True
+            print_expr = True
+            print_gauss_error = True
+            print_max_error = True
+        if print_values:
+            ret_str += self.get_value_str(as_latex)
+            if print_gauss_error or print_max_error or print_expr:
+                ret_str += &#34;\n&#34;
+        if print_expr:
+            ret_str += self.name + &#34;=&#34; + self.get_expr(as_latex)
+            if print_gauss_error or print_max_error:
+                ret_str += &#34;\n&#34;
+        if print_gauss_error:
+            ret_str += r&#34;\sigma_{&#34; + options.gauss_error_name + &#34;_{&#34; + self.name + &#34;}}&#34; + &#34;=&#34; + self.get_gauss_error(
+                as_latex=as_latex)
+            if print_max_error:
+                ret_str += &#34;\n&#34;
+        if print_max_error:
+            ret_str += r&#34;\sigma_{&#34; + options.max_error_name + &#34;_{&#34; + self.name + &#34;}}&#34; + &#34;=&#34; + self.get_max_error(
+                as_latex=as_latex)
+        return ret_str
+
+    def __getitem__(self, key):
+        &#34;&#34;&#34;
+        Return i&#39;th variable or sliced variable.
+
+        :param key: index or slice
+        :return: i&#39;th variable if instance is list. otherwise returns value key=0, sig key=1, max key=2
+        &#34;&#34;&#34;
+        if self.length &gt; 1:
+            name = &#34;&#34;
+            if type(key) is int:
+                name = self.name + &#34;_{&#34; + str(key) + &#34;}&#34;
+            else:
+                name = self.name
+            return evar(self.value[key], self.gauss_error[key], self.max_error[key], name)
+
+        else:
+            if key == 0:
+                return self.value
+            elif key == 1:
+                return self.gauss_error
+            elif key == 2:
+                return self.max_error
+            else:
+                raise IndexError(&#34;list index out of range&#34;)
+
+    # TODO add check for correlations. sig_stat(x-x+d) e.g. should  just be sig_stat(d)
+    # operators
+    def __finish_operation(self):
+        if type(self.value) is np.ndarray:
+            self.length = len(self.value)
+            if np.count_nonzero(self.gauss_error) &gt; 0:
+                self.has_gauss_error = True
+            else:
+                self.has_gauss_error = False
+            if np.count_nonzero(self.max_error) &gt; 0:
+                self.has_max_error = True
+            else:
+                self.has_max_error = False
+        else:
+            self.length = 1
+            if self.gauss_error == 0:
+                self.has_gauss_error = False
+            else:
+                self.has_gauss_error = True
+            if self.max_error == 0:
+                self.has_max_error = False
+            else:
+                self.has_max_error = True
+
+    # TODO implement iadd isub imul itruediv completely
+    # + and -
+    # +
+    def __add__(self, other):
+        RET_VAR = evar(name=&#34;INT_OP&#34;)
+        if type(other) == evar:
+            RET_VAR.value = self.value + other.value
+            RET_VAR.gauss_error = np.sqrt(self.gauss_error ** 2 + other.gauss_error ** 2)
+            RET_VAR.max_error = np.abs(self.max_error) + np.abs(other.max_error)
+            RET_VAR.__expr = self.__expr + other.__expr
+            RET_VAR.__dependencies = other.__dependencies | self.__dependencies
+        else:
+            RET_VAR.value = self.value + other
+            RET_VAR.gauss_error = self.gauss_error
+            RET_VAR.max_error = self.max_error
+            RET_VAR.__expr = self.__expr + other
+            RET_VAR.__dependencies = self.__dependencies
+        RET_VAR.__finish_operation()
+        return RET_VAR
+
+    def __radd__(self, other):
+        return self + other
+
+    def __iadd__(self, other):
+        if type(other) == evar:
+            raise NotImplementedError(&#34;Currently only supported with numbers or lists but not evar&#34;)
+        else:
+            self.value += other
+            self.__expr += other
+            return self
+
+    # -
+    def __sub__(self, other):
+        RET_VAR = evar(name=&#34;INT_OP&#34;)
+        if type(other) == evar:
+            RET_VAR.value = self.value - other.value
+            RET_VAR.gauss_error = np.sqrt(self.gauss_error ** 2 + other.gauss_error ** 2)
+            RET_VAR.max_error = np.abs(self.max_error) + np.abs(other.max_error)
+            RET_VAR.__expr = self.__expr - other.__expr
+            RET_VAR.__dependencies = other.__dependencies | self.__dependencies
+        else:
+            RET_VAR.value = self.value - other
+            RET_VAR.gauss_error = self.gauss_error
+            RET_VAR.max_error = self.max_error
+            RET_VAR.__expr = self.__expr - other
+            RET_VAR.__dependencies = self.__dependencies
+        RET_VAR.__finish_operation()
+        return RET_VAR
+
+    # TODO make this less lazy and more efficient
+    def __rsub__(self, other):
+        return -self + other
+
+    def __isub__(self, other):
+        if type(other) == evar:
+            raise NotImplementedError(&#34;Currently only supported with numbers or lists but not evar&#34;)
+        else:
+            self.value -= other
+            self.__expr -= other
+            return self
+
+    def __neg__(self):
+        RET_VAR = evar(name=&#34;INT_OP&#34;)
+        RET_VAR.value = -self.value
+        RET_VAR.gauss_error = self.gauss_error
+        RET_VAR.max_error = self.max_error
+        RET_VAR.__expr = -self.__expr
+        RET_VAR.__dependencies = self.__dependencies
+        RET_VAR.__finish_operation()
+        return RET_VAR
+
+    # * and /
+    # *
+    def __mul__(self, other):
+        RET_VAR = evar(name=&#34;INT_OP&#34;)
+        if type(other) == evar:
+            RET_VAR.value = self.value * other.value
+            RET_VAR.gauss_error = np.sqrt((other.gauss_error * self.value) ** 2 + (other.value * self.gauss_error) ** 2)
+            RET_VAR.max_error = np.abs(other.max_error * self.value) + np.abs(self.max_error * other.value)
+            RET_VAR.__expr = self.__expr * other.__expr
+            RET_VAR.__dependencies = other.__dependencies | self.__dependencies
+        else:
+            RET_VAR.value = self.value * other
+            RET_VAR.gauss_error = self.gauss_error * other
+            RET_VAR.max_error = self.max_error * other
+            RET_VAR.__expr = self.__expr * other
+            RET_VAR.__dependencies = self.__dependencies
+        RET_VAR.__finish_operation()
+        return RET_VAR
+
+    def __rmul__(self, other):
+        return self * other
+
+    def __imul__(self, other):
+        if type(other) == evar:
+            raise NotImplementedError(&#34;Currently only supported with numbers or lists but not evar&#34;)
+        else:
+            self.max_error *= abs(other)
+            self.gauss_error *= abs(other)
+            self.value *= other
+            self.__expr *= other
+            return self
+
+    # /
+
+    def __truediv__(self, other):
+        RET_VAR = evar(name=&#34;INT_OP&#34;)
+        if type(other) == evar:
+            RET_VAR.value = self.value / other.value
+            RET_VAR.gauss_error = np.sqrt(
+                (other.gauss_error * self.value) ** 2 + (other.value * self.gauss_error) ** 2) / (other.value ** 2)
+            RET_VAR.max_error = np.abs(other.max_error * self.value / other.value ** 2) + np.abs(
+                self.max_error / other.value)
+            RET_VAR.__expr = self.__expr / other.__expr
+            RET_VAR.__dependencies = other.__dependencies | self.__dependencies
+        else:
+            RET_VAR.value = self.value / other
+            RET_VAR.gauss_error = self.gauss_error / other
+            RET_VAR.max_error = np.abs(self.max_error / other)
+            RET_VAR.__expr = self.__expr / other
+            RET_VAR.__dependencies = self.__dependencies
+        RET_VAR.__finish_operation()
+        return RET_VAR
+
+    def __rtruediv__(self, other):
+        RET_VAR = evar(name=&#34;INT_OP&#34;)
+        RET_VAR.value = other / self.value
+        RET_VAR.gauss_error = other * np.abs(self.gauss_error) / self.value ** 2
+        RET_VAR.max_error = other * np.abs(self.max_error / self.value ** 2)
+        RET_VAR.__expr = other / self.__expr
+        RET_VAR.__dependencies = self.__dependencies
+        RET_VAR.__finish_operation()
+        return RET_VAR
+
+    def __itruediv__(self, other):
+        if type(other) == evar:
+            raise NotImplementedError(&#34;Currently only supported with numbers or lists but not evar&#34;)
+        else:
+            self.max_error /= abs(other)
+            self.gauss_error /= abs(other)
+            self.value /= other
+            self.__expr /= other
+            return self
+
+    # ^
+    def __pow__(self, other):
+        RET_VAR = evar(name=&#34;INT_OP&#34;)
+        if type(other) == evar:
+            RET_VAR.value = self.value ** other.value
+            inner = (self.gauss_error * other.value) ** 2 + (other.gauss_error * self.value * np.log(self.value)) ** 2
+            RET_VAR.gauss_error = np.sqrt(inner * self.value ** (2 * other.value - 2))
+            RET_VAR.max_error = np.abs(self.max_error * other.value * self.value ** (other.value - 1)) + np.abs(
+                other.max_error * np.log(self.value) * self.value ** other.value)
+            RET_VAR.__expr = self.__expr ** other.__expr
+            RET_VAR.__dependencies = other.__dependencies | self.__dependencies
+        else:
+            RET_VAR.value = self.value ** other
+            RET_VAR.gauss_error = np.sqrt(self.value ** (2 * other - 2)) * np.abs(self.gauss_error * other)
+            RET_VAR.max_error = np.abs(self.max_error * other * self.value ** (other - 1))
+            RET_VAR.__expr = self.__expr ** other
+            RET_VAR.__dependencies = self.__dependencies
+        RET_VAR.__finish_operation()
+        return RET_VAR
+
+    def __rpow__(self, other):
+        # other**self
+        RET_VAR = evar(name=&#34;INT_OP&#34;)
+        RET_VAR.value = other ** self.value
+        RET_VAR.gauss_error = np.abs(self.gauss_error) * np.log(other) * other ** self.value
+        RET_VAR.max_error = np.abs(self.max_error) * np.log(other) * other ** self.value
+        RET_VAR.__expr = other ** self.__expr
+        RET_VAR.__dependencies = self.__dependencies
+        RET_VAR.__finish_operation()
+        return RET_VAR
+
+    def __ipow__(self, other):
+        if type(other) == evar:
+            raise NotImplementedError(&#34;Currently only supported with numbers or lists but not evar&#34;)
+        else:
+            self.value **= other
+            self.gauss_error = np.abs(self.gauss_error) * np.log(other) * other ** self.value
+            self.max_error = np.abs(self.max_error) * np.log(other) * other ** self.value
+            self.__expr **= other
+            return self
+
+    def __del__(self):
+        if self.__id != -1:
+            del self.symbol
+            del self.m_symbol
+            del self.g_symbol
+            del evar.var_dic[self.__id]
+
+    def set_name(self, name):
+        &#34;&#34;&#34;
+        Sets name for this variable and also makes it a &#34;real&#34; variable.
+        Using it in equations will now longer give expression of defining equation of this variable
+
+        :param name: the new name for the variable
+        &#34;&#34;&#34;
+        if self.__id == -1:
+            self.__shadow_expr = self.__expr
+            self.__shadow_dependencies = self.__dependencies
+            self.__id = evar.dic_id
+            self.__dependencies = {self.__id}
+            evar.dic_id += 1
+            evar.var_dic[self.__id] = weakref.ref(self)
+            self.symbol = sympy.symbols(&#34;v&#34; + str(self.__id) + &#34;v&#34;)
+            self.g_symbol = sympy.symbols(&#34;g&#34; + str(self.__id) + &#34;g&#34;)
+            self.m_symbol = sympy.symbols(&#34;m&#34; + str(self.__id) + &#34;m&#34;)
+            self.__expr = self.symbol
+            self.name = name
+            self.__finish_operation()
+        else:
+            self.name = name
+
+    def to_variable(self, name):
+        &#34;&#34;&#34;
+        Same as set_name. Exists for backwards compatability
+        :param name: new name of this instance
+        :return:
+        &#34;&#34;&#34;
+        self.set_name(name)
+
+    def __get_expr(self):
+        if self.__id == -1:
+            if options.simplify_eqs:
+                return sympy.simplify(self.__expr), self.__dependencies
+            else:
+                return self.__expr, self.__dependencies
+        else:
+            if options.simplify_eqs:
+                return sympy.simplify(self.__shadow_expr), self.__shadow_dependencies
+            else:
+                return self.__shadow_expr, self.__shadow_dependencies
+
+    def __replace_ids(self, string):
+        temp_str = string
+        expr, dependencies = self.__get_expr()
+        for i in dependencies:
+            num = i
+            temp_str = temp_str.replace(&#34;v&#34; + str(num) + &#34;v&#34;, evar.var_dic[num]().name)
+            temp_str = temp_str.replace(&#34;g&#34; + str(num) + &#34;g&#34;,
+                                        r&#34;\sigma_{&#34; + options.gauss_error_name + &#34;_{&#34; + evar.var_dic[
+                                            i]().name + &#34;}}&#34;)
+            temp_str = temp_str.replace(&#34;m&#34; + str(num) + &#34;m&#34;,
+                                        r&#34;\sigma_{&#34; + options.max_error_name + &#34;_{&#34; + evar.var_dic[i]().name + &#34;}}&#34;)
+        return temp_str</code></pre>
+</details>
+<h3>Class variables</h3>
+<dl>
+<dt id="error_analysis.evar.evar.dic_id"><code class="name">var <span class="ident">dic_id</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="error_analysis.evar.evar.var_dic"><code class="name">var <span class="ident">var_dic</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="error_analysis.evar.evar.get_combined_error"><code class="name flex">
+<span>def <span class="ident">get_combined_error</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Combines errors by assuming errors are independet</p>
+<p>:return: combined error</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_combined_error(self):
+    &#34;&#34;&#34;
+    Combines errors by assuming errors are independet
+
+    :return: combined error
+    &#34;&#34;&#34;
+    return np.sqrt(self.gauss_error ** 2 + self.max_error ** 2)</code></pre>
+</details>
+</dd>
+<dt id="error_analysis.evar.evar.get_error"><code class="name flex">
+<span>def <span class="ident">get_error</span></span>(<span>self, error_mode=None, error_vars=None, as_latex=None, with_name=True)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get error/s equation/s as strings</p>
+<p>:param error_mode: Which error type you want to retrieve. See ErrorMode
+:param error_vars: Errors will be calculated only in respect to these. Standard is every variable that has error
+:param as_latex: wether to print latex style
+:param with_name: wether to print error name in front
+:return: error equation/s as string</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_error(self, error_mode=None, error_vars=None, as_latex=None, with_name=True):
+    &#34;&#34;&#34;
+    Get error/s equation/s as strings
+
+    :param error_mode: Which error type you want to retrieve. See ErrorMode
+    :param error_vars: Errors will be calculated only in respect to these. Standard is every variable that has error
+    :param as_latex: wether to print latex style
+    :param with_name: wether to print error name in front
+    :return: error equation/s as string
+    &#34;&#34;&#34;
+    error_mode = options.error_mode if error_mode is None else error_mode
+    if error_mode == ErrorMode.NONE:
+        return &#34;&#34;
+    if error_mode == ErrorMode.BOTH:
+        return self.get_error(ErrorMode.GAUSS, error_vars, as_latex, with_name) + &#34;\n&#34; + \
+               self.get_error(ErrorMode.MAX, error_vars, as_latex, with_name)
+    if error_mode == ErrorMode.COMBINED:
+        raise Exception(&#34;this makes no sense here&#34;)
+    if as_latex is None:
+        as_latex = options.as_latex
+    expr, dependencies = self.__get_expr()
+    if error_vars is None:
+        error_vars = []
+        for i in dependencies:
+            entry = evar.var_dic[i]()
+            if entry.has_gauss_error and error_mode == 0:
+                error_vars.append(entry)
+            if entry.has_max_error and error_mode == 1:
+                error_vars.append(entry)
+    err = None
+    if error_mode == 0:
+        err = tools.get_gauss_expr(expr, error_vars)
+    else:
+        err = tools.get_max_expr(expr, error_vars)
+    if options.simplify_eqs:
+        err = sympy.simplify(err)
+    err = self.__replace_ids(sympy.latex(err)) if as_latex else self.__replace_ids(
+        str(err))
+    if with_name:
+        if error_mode == ErrorMode.MAX:
+            err = r&#34;\sigma_{&#34; + options.max_error_name + &#34;_{&#34; + self.name + &#34;}}&#34; + &#34; = &#34; + err
+        if error_mode == ErrorMode.GAUSS:
+            err = r&#34;\sigma_{&#34; + options.gauss_error_name + &#34;_{&#34; + self.name + &#34;}}&#34; + &#34; = &#34; + err
+    return err</code></pre>
+</details>
+</dd>
+<dt id="error_analysis.evar.evar.get_expr"><code class="name flex">
+<span>def <span class="ident">get_expr</span></span>(<span>self, as_latex=None, with_name=True)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Gets expression (equation) of this variable</p>
+<p>:param as_latex: wether to make this latex ready or more readable for console. Default is defined by options
+:param with_name: wether to add name in front
+:return: expression as string</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_expr(self, as_latex=None, with_name=True):
+    &#34;&#34;&#34;
+    Gets expression (equation) of this variable
+
+    :param as_latex: wether to make this latex ready or more readable for console. Default is defined by options
+    :param with_name: wether to add name in front
+    :return: expression as string
+    &#34;&#34;&#34;
+    as_latex = options.as_latex if as_latex is None else as_latex
+    expr, dependencies = self.__get_expr()
+    if options.simplify_eqs:
+        expr = sympy.simplify(expr)
+    expr = self.__replace_ids(sympy.latex(expr)) if as_latex else self.__replace_ids(str(expr))
+    if with_name:
+        expr = self.name + &#34; = &#34; + expr
+    return expr</code></pre>
+</details>
+</dd>
+<dt id="error_analysis.evar.evar.get_gauss_error"><code class="name flex">
+<span>def <span class="ident">get_gauss_error</span></span>(<span>self, error_vars=None, as_latex=None, with_name=True)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>calls get_error with ErrorMode.GAUSS</p>
+<p>:param error_vars: see get_error
+:param as_latex: see get_error
+:param with_name: see get_error
+:return: see get_error</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_gauss_error(self, error_vars=None, as_latex=None, with_name=True):
+    &#34;&#34;&#34;
+    calls get_error with ErrorMode.GAUSS
+
+    :param error_vars: see get_error
+    :param as_latex: see get_error
+    :param with_name: see get_error
+    :return: see get_error
+    &#34;&#34;&#34;
+    return self.get_error(ErrorMode.GAUSS, error_vars, as_latex, with_name)</code></pre>
+</details>
+</dd>
+<dt id="error_analysis.evar.evar.get_max_error"><code class="name flex">
+<span>def <span class="ident">get_max_error</span></span>(<span>self, error_vars=None, as_latex=None, with_name=True)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_max_error(self, error_vars=None, as_latex=None, with_name=True):
+    return self.get_error(ErrorMode.MAX, error_vars, as_latex, with_name)</code></pre>
+</details>
+</dd>
+<dt id="error_analysis.evar.evar.get_value_str"><code class="name flex">
+<span>def <span class="ident">get_value_str</span></span>(<span>self, error_mode=None, as_latex=None, no_rounding=None, scientific=True)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get value or values of instance formatted</p>
+<p>:param error_mode: See ErrorMode
+:param as_latex: See options
+:param no_rounding: See options
+:param scientific: wether to format in scientific notation or not
+:return: formatted string</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_value_str(self, error_mode=None, as_latex=None, no_rounding=None, scientific=True):
+    &#34;&#34;&#34;
+    Get value or values of instance formatted
+
+    :param error_mode: See ErrorMode
+    :param as_latex: See options
+    :param no_rounding: See options
+    :param scientific: wether to format in scientific notation or not
+    :return: formatted string
+    &#34;&#34;&#34;
+    no_rounding = options.no_rounding if no_rounding is None else no_rounding
+    as_latex = options.as_latex if as_latex is None else as_latex
+    error_mode = options.error_mode if error_mode is None else error_mode
+    pm = &#34; \pm &#34; if as_latex else &#34; +- &#34;
+    times = &#34;\cdot &#34; if as_latex else &#34;* &#34;
+    if self.length == 1:
+        a, b, c, d = 0, 0, 0, 0
+        first_error = self.get_combined_error() if error_mode == ErrorMode.COMBINED else self.gauss_error
+        if scientific:
+            a, b, c, d = tools.transform_to_sig(self.value, first_error, self.max_error, no_rounding)
+        else:
+            a, b, c, d = tools.transform_to_sig(self.value, first_error, self.max_error, no_rounding)
+            a *= 10 ** d
+            b *= 10 ** d
+            c *= 10 ** d
+        dec_exp = &#34;&#34;
+        if d == 0:
+            pass
+        elif d == 1:
+            dec_exp = times + &#34;10&#34;
+        else:
+            dec_exp = times + &#34;10^{&#34; + str(d) + &#34;}&#34;
+
+        error_str = &#34;&#34;
+        if error_mode == ErrorMode.NONE:
+            return self.name + &#34; = &#34; + str(a) + &#34; &#34; + dec_exp
+        elif error_mode == ErrorMode.BOTH:
+            error_str = pm + str(b) + pm + str(c)
+        elif error_mode == ErrorMode.MAX:
+            error_str = pm + str(c)
+        elif error_mode == ErrorMode.GAUSS:
+            error_str = pm + str(b)
+        elif error_mode == ErrorMode.COMBINED:
+            error_str = pm + str(b)
+        return self.name + &#34; = (&#34; + str(a) + error_str + &#34;) &#34; + dec_exp
+
+    else:
+        string = &#34;&#34;
+        for i in range(self.length):
+            string += self[i].get_value_str(error_mode, as_latex, no_rounding, scientific) + &#34;\n&#34;
+        return string[:-1]</code></pre>
+</details>
+</dd>
+<dt id="error_analysis.evar.evar.set_name"><code class="name flex">
+<span>def <span class="ident">set_name</span></span>(<span>self, name)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets name for this variable and also makes it a "real" variable.
+Using it in equations will now longer give expression of defining equation of this variable</p>
+<p>:param name: the new name for the variable</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_name(self, name):
+    &#34;&#34;&#34;
+    Sets name for this variable and also makes it a &#34;real&#34; variable.
+    Using it in equations will now longer give expression of defining equation of this variable
+
+    :param name: the new name for the variable
+    &#34;&#34;&#34;
+    if self.__id == -1:
+        self.__shadow_expr = self.__expr
+        self.__shadow_dependencies = self.__dependencies
+        self.__id = evar.dic_id
+        self.__dependencies = {self.__id}
+        evar.dic_id += 1
+        evar.var_dic[self.__id] = weakref.ref(self)
+        self.symbol = sympy.symbols(&#34;v&#34; + str(self.__id) + &#34;v&#34;)
+        self.g_symbol = sympy.symbols(&#34;g&#34; + str(self.__id) + &#34;g&#34;)
+        self.m_symbol = sympy.symbols(&#34;m&#34; + str(self.__id) + &#34;m&#34;)
+        self.__expr = self.symbol
+        self.name = name
+        self.__finish_operation()
+    else:
+        self.name = name</code></pre>
+</details>
+</dd>
+<dt id="error_analysis.evar.evar.show"><code class="name flex">
+<span>def <span class="ident">show</span></span>(<span>self, font_size=12)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Shows screen with all equations and values</p>
+<p>:param font_size: font size of everything</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def show(self, font_size=12):
+    &#34;&#34;&#34;
+    Shows screen with all equations and values
+
+    :param font_size: font size of everything
+    &#34;&#34;&#34;
+    text = &#34;&#34;
+    text += &#34;$&#34; + self.get_expr(as_latex=True) + &#34;$\n&#34;
+    text += &#34;$&#34; + self.get_gauss_error(as_latex=True) + &#34;$\n&#34;
+    text += &#34;$&#34; + self.get_max_error(as_latex=True) + &#34;$\n&#34;
+    t_str = self.get_value_str(as_latex=True)
+    t_str = t_str.replace(&#34;\n&#34;, &#34;$\n$&#34;)
+    text += &#34;$&#34; + t_str + &#34;$&#34;
+    plt.text(0, 0.1, text, fontsize=font_size)
+    plt.axis(&#34;off&#34;)
+    plt.show()</code></pre>
+</details>
+</dd>
+<dt id="error_analysis.evar.evar.to_str"><code class="name flex">
+<span>def <span class="ident">to_str</span></span>(<span>self, print_values=False, print_expr=False, print_gauss_error=False, print_max_error=False, print_all=False, as_latex=True)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>UNFINISHED. Do not use</p>
+<p>:param print_values:
+:param print_expr:
+:param print_gauss_error:
+:param print_max_error:
+:param print_all:
+:param as_latex:
+:return:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def to_str(self, print_values=False, print_expr=False, print_gauss_error=False, print_max_error=False,
+           print_all=False, as_latex=options.as_latex):
+    &#34;&#34;&#34;
+    UNFINISHED. Do not use
+
+    :param print_values:
+    :param print_expr:
+    :param print_gauss_error:
+    :param print_max_error:
+    :param print_all:
+    :param as_latex:
+    :return:
+    &#34;&#34;&#34;
+    ret_str = &#34;&#34;
+    if print_values == False and print_expr == False and print_gauss_error == False and print_max_error == False and print_all == False:
+        ret_str = self.name
+    if print_all:
+        print_values = True
+        print_expr = True
+        print_gauss_error = True
+        print_max_error = True
+    if print_values:
+        ret_str += self.get_value_str(as_latex)
+        if print_gauss_error or print_max_error or print_expr:
+            ret_str += &#34;\n&#34;
+    if print_expr:
+        ret_str += self.name + &#34;=&#34; + self.get_expr(as_latex)
+        if print_gauss_error or print_max_error:
+            ret_str += &#34;\n&#34;
+    if print_gauss_error:
+        ret_str += r&#34;\sigma_{&#34; + options.gauss_error_name + &#34;_{&#34; + self.name + &#34;}}&#34; + &#34;=&#34; + self.get_gauss_error(
+            as_latex=as_latex)
+        if print_max_error:
+            ret_str += &#34;\n&#34;
+    if print_max_error:
+        ret_str += r&#34;\sigma_{&#34; + options.max_error_name + &#34;_{&#34; + self.name + &#34;}}&#34; + &#34;=&#34; + self.get_max_error(
+            as_latex=as_latex)
+    return ret_str</code></pre>
+</details>
+</dd>
+<dt id="error_analysis.evar.evar.to_variable"><code class="name flex">
+<span>def <span class="ident">to_variable</span></span>(<span>self, name)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Same as set_name. Exists for backwards compatability
+:param name: new name of this instance
+:return:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def to_variable(self, name):
+    &#34;&#34;&#34;
+    Same as set_name. Exists for backwards compatability
+    :param name: new name of this instance
+    :return:
+    &#34;&#34;&#34;
+    self.set_name(name)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="error_analysis" href="index.html">error_analysis</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="error_analysis.evar.Variable" href="#error_analysis.evar.Variable">Variable</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="error_analysis.evar.ErrorMode" href="#error_analysis.evar.ErrorMode">ErrorMode</a></code></h4>
+<ul class="">
+<li><code><a title="error_analysis.evar.ErrorMode.BOTH" href="#error_analysis.evar.ErrorMode.BOTH">BOTH</a></code></li>
+<li><code><a title="error_analysis.evar.ErrorMode.COMBINED" href="#error_analysis.evar.ErrorMode.COMBINED">COMBINED</a></code></li>
+<li><code><a title="error_analysis.evar.ErrorMode.GAUSS" href="#error_analysis.evar.ErrorMode.GAUSS">GAUSS</a></code></li>
+<li><code><a title="error_analysis.evar.ErrorMode.MAX" href="#error_analysis.evar.ErrorMode.MAX">MAX</a></code></li>
+<li><code><a title="error_analysis.evar.ErrorMode.NONE" href="#error_analysis.evar.ErrorMode.NONE">NONE</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="error_analysis.evar.evar" href="#error_analysis.evar.evar">evar</a></code></h4>
+<ul class="two-column">
+<li><code><a title="error_analysis.evar.evar.dic_id" href="#error_analysis.evar.evar.dic_id">dic_id</a></code></li>
+<li><code><a title="error_analysis.evar.evar.get_combined_error" href="#error_analysis.evar.evar.get_combined_error">get_combined_error</a></code></li>
+<li><code><a title="error_analysis.evar.evar.get_error" href="#error_analysis.evar.evar.get_error">get_error</a></code></li>
+<li><code><a title="error_analysis.evar.evar.get_expr" href="#error_analysis.evar.evar.get_expr">get_expr</a></code></li>
+<li><code><a title="error_analysis.evar.evar.get_gauss_error" href="#error_analysis.evar.evar.get_gauss_error">get_gauss_error</a></code></li>
+<li><code><a title="error_analysis.evar.evar.get_max_error" href="#error_analysis.evar.evar.get_max_error">get_max_error</a></code></li>
+<li><code><a title="error_analysis.evar.evar.get_value_str" href="#error_analysis.evar.evar.get_value_str">get_value_str</a></code></li>
+<li><code><a title="error_analysis.evar.evar.set_name" href="#error_analysis.evar.evar.set_name">set_name</a></code></li>
+<li><code><a title="error_analysis.evar.evar.show" href="#error_analysis.evar.evar.show">show</a></code></li>
+<li><code><a title="error_analysis.evar.evar.to_str" href="#error_analysis.evar.evar.to_str">to_str</a></code></li>
+<li><code><a title="error_analysis.evar.evar.to_variable" href="#error_analysis.evar.evar.to_variable">to_variable</a></code></li>
+<li><code><a title="error_analysis.evar.evar.var_dic" href="#error_analysis.evar.evar.var_dic">var_dic</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>
