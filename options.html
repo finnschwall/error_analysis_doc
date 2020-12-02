@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.9.2" />
 <title>error_analysis.options API documentation</title>
-<meta name="description" content="" />
+<meta name="description" content="Options to control library behaviour …" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -22,45 +22,11 @@
 <h1 class="title">Module <code>error_analysis.options</code></h1>
 </header>
 <section id="section-intro">
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python"># TODO implement fast mode
-# TODO implement max digits
-
-as_latex = True
-&#34;&#34;&#34;when false than string will be printed in more readable format&#34;&#34;&#34;
-
-gauss_error_name = &#34;stat&#34;
-&#34;&#34;&#34;name of gauss error for printing &#34;&#34;&#34;
-
-max_error_name = &#34;sys&#34;
-&#34;&#34;&#34; name of maximum error for printing&#34;&#34;&#34;
-
-no_rounding = False
-&#34;&#34;&#34; library will normaly look for siginificant places and cut numbers accordingly.
-can be deactivated with this option&#34;&#34;&#34;
-
-simplify_eqs = True
-&#34;&#34;&#34;simplify equations before printing them
-some simplifcations like sqrt(b*b)=sqrt(b^2)=|b| cannot be prevented&#34;&#34;&#34;
-
-error_mode = 2
-&#34;&#34;&#34;Specify how error output works. Does not effect calculations. For more information look at evar.py/ErrorMode&#34;&#34;&#34;
-
-# unfinished or buggy
-
-
-max_digits = 8
-&#34;&#34;&#34;At this digit all output will be rounded despite being more precise&#34;&#34;&#34;
-
-fast_mode = False
-&#34;&#34;&#34;Ignore expressions and just calculate. Significantly faster but doesn&#39;t allow
-printing of gauss max or own expression.
-WARNING: this will cause immediate garbage collection
-&#34;&#34;&#34;</code></pre>
-</details>
+<p>Options to control library behaviour</p>
+<h2 id="notes">Notes</h2>
+<p>If an option is also a function parameter, the here specified values are for fallback.</p>
+<p>e. g. calling a.to_get_expr(as_latex=False) will return as non latex string even if options.as_latex=True
+If nothing is specified the assumed value will be options.as_latex.</p>
 </section>
 <section>
 </section>
@@ -69,25 +35,32 @@ WARNING: this will cause immediate garbage collection
 <dl>
 <dt id="error_analysis.options.as_latex"><code class="name">var <span class="ident">as_latex</span></code></dt>
 <dd>
-<div class="desc"><p>when false than string will be printed in more readable format</p></div>
+<div class="desc"><p>wether string will be returned in more console friendly format or for latex parsing</p></div>
 </dd>
 <dt id="error_analysis.options.error_mode"><code class="name">var <span class="ident">error_mode</span></code></dt>
 <dd>
-<div class="desc"><p>Specify how error output works. Does not effect calculations. For more information look at evar.py/ErrorMode</p></div>
+<div class="desc"><p>Specify how error output works. Does not effect calculations. </p>
+<h2 id="see-also">See Also</h2>
+<p><code><a title="error_analysis.evar.ErrorMode" href="evar.html#error_analysis.evar.ErrorMode">ErrorMode</a></code></p></div>
 </dd>
 <dt id="error_analysis.options.fast_mode"><code class="name">var <span class="ident">fast_mode</span></code></dt>
 <dd>
 <div class="desc"><p>Ignore expressions and just calculate. Significantly faster but doesn't allow
-printing of gauss max or own expression.
-WARNING: this will cause immediate garbage collection</p></div>
+printing of gauss max or own expression.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning:&ensp;not working yet</p>
+</div></div>
 </dd>
 <dt id="error_analysis.options.gauss_error_name"><code class="name">var <span class="ident">gauss_error_name</span></code></dt>
 <dd>
-<div class="desc"><p>name of gauss error for printing</p></div>
+<div class="desc"><p>name of gauss error for printing. Printing gauss error gives \sigma_{options.gauss_error_name}</p></div>
 </dd>
 <dt id="error_analysis.options.max_digits"><code class="name">var <span class="ident">max_digits</span></code></dt>
 <dd>
-<div class="desc"><p>At this digit all output will be rounded despite being more precise</p></div>
+<div class="desc"><p>At this digit all output will be rounded despite being more precise</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning:&ensp;not working yet</p>
+</div></div>
 </dd>
 <dt id="error_analysis.options.max_error_name"><code class="name">var <span class="ident">max_error_name</span></code></dt>
 <dd>
@@ -95,13 +68,18 @@ WARNING: this will cause immediate garbage collection</p></div>
 </dd>
 <dt id="error_analysis.options.no_rounding"><code class="name">var <span class="ident">no_rounding</span></code></dt>
 <dd>
-<div class="desc"><p>library will normaly look for siginificant places and cut numbers accordingly.
-can be deactivated with this option</p></div>
+<div class="desc"><p>library will normaly look for significant places and cut numbers accordingly.
+can be deactivated with this option</p>
+<h2 id="notes">Notes</h2>
+<p>(1.032112+-0.0122+-0.042221) will be cut to (1.032+-0.012+-0.042)</p></div>
 </dd>
 <dt id="error_analysis.options.simplify_eqs"><code class="name">var <span class="ident">simplify_eqs</span></code></dt>
 <dd>
-<div class="desc"><p>simplify equations before printing them
-some simplifcations like sqrt(b*b)=sqrt(b^2)=|b| cannot be prevented</p></div>
+<div class="desc"><p>Simplify equations before printing them.
+Some simplifcations like </p>
+<pre><code>sqrt(b*b)=sqrt(b^2)=|b|
+</code></pre>
+<p>cannot be prevented</p></div>
 </dd>
 </dl>
 </section>
@@ -113,7 +91,9 @@ some simplifcations like sqrt(b*b)=sqrt(b^2)=|b| cannot be prevented</p></div>
 <nav id="sidebar">
 <h1>Index</h1>
 <div class="toc">
-<ul></ul>
+<ul>
+<li><a href="#notes">Notes</a></li>
+</ul>
 </div>
 <ul id="index">
 <li><h3>Super-module</h3>

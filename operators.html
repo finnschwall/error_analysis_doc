@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.9.2" />
 <title>error_analysis.operators API documentation</title>
-<meta name="description" content="" />
+<meta name="description" content="Contains often used operators …" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -22,178 +22,11 @@
 <h1 class="title">Module <code>error_analysis.operators</code></h1>
 </header>
 <section id="section-intro">
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python"># TODO check for values i.e is somebody trying to calculate log(-10) or something
-from error_analysis.evar import *
-from error_analysis import tools
-
-&#34;&#34;&#34;
-Contains often used operators.
- 
-&#34;&#34;&#34;
-op_var = sympy.symbols(&#34;op_var&#34;, real=True)
-op_var_e = sympy.symbols(&#34;op_var_e&#34;, real=True)
-
-
-# About 80-110 times slower than pre coded numpy expression
-def single_operator(expr, x):
-    RET_VAR = evar(name=&#34;INT_OP&#34;)
-    RET_VAR._evar__dependencies = x._evar__dependencies
-    RET_VAR._evar__expr = expr(x._evar__expr)
-    evalf = sympy.lambdify(op_var, expr(op_var))
-    RET_VAR.value = evalf(x.value)
-    error_expr = abs(expr(op_var).diff(op_var) * op_var_e)
-    evale = sympy.lambdify([op_var, op_var_e], error_expr)
-    RET_VAR.gauss_error = evale(x.value, x.gauss_error)
-    RET_VAR.max_error = evale(x.value, x.max_error)
-    RET_VAR._evar__finish_operation()
-    return RET_VAR
-
-
-# about (before optim 380) 80-100 times slower than pre coded numpy expression.
-def custom_operation(expr, variables):
-    &#34;&#34;&#34;
-
-    :param expr: equation as string. all variables must be named v0... vi
-    :param variables: the vi as var list
-    :return:
-    &#34;&#34;&#34;
-    RET_VAR = evar(name=&#34;INT_OP&#34;)
-    dependencies = set()
-    expr = sympy.sympify(expr)
-    for i in range(len(variables)):
-        expr = expr.subs(&#34;v&#34; + str(i), variables[i].symbol)
-        dependencies.add(variables[i]._evar__id)
-    RET_VAR._evar__expr = expr
-    RET_VAR._evar__dependencies = dependencies
-    gauss_expr = tools.get_gauss_expr(expr, variables)
-    max_expr = tools.get_max_expr(expr, variables)
-    RET_VAR.value = tools.eval_e(expr, variables)
-    RET_VAR.max_error = tools.eval_m(max_expr, variables)
-    RET_VAR.gauss_error = tools.eval_g(gauss_expr, variables)
-    if type(RET_VAR.value) is list:
-        RET_VAR.value = np.array(RET_VAR.value)
-        RET_VAR.gauss_error = np.array(RET_VAR.gauss_error)
-        RET_VAR.max_error = np.array(RET_VAR.max_error)
-    RET_VAR._evar__finish_operation()
-    return RET_VAR
-
-
-def log(x):
-    if type(x) is evar:
-        RET_VAR = evar(name=&#34;INT_OP&#34;)
-        RET_VAR.value = np.log(x.value)
-        RET_VAR.gauss_error = np.abs(x.gauss_error / x.value)
-        RET_VAR.max_error = np.abs(x.max_error / x.value)
-        RET_VAR._evar__expr = sympy.log(x._evar__expr)
-        RET_VAR._evar__dependencies = x._evar__dependencies
-        RET_VAR._evar__finish_operation()
-        return RET_VAR
-    else:
-        return np.log(x)
-
-
-def exp(x):
-    if type(x) is evar:
-        RET_VAR = evar(name=&#34;INT_OP&#34;)
-        RET_VAR.value = np.exp(x.value)
-        RET_VAR.gauss_error = np.exp(x.value) * np.abs(x.gauss_error)
-        RET_VAR.max_error = np.exp(x.value) * np.abs(x.max_error)
-        RET_VAR._evar__expr = sympy.exp(x._evar__expr)
-        RET_VAR._evar__dependencies = x._evar__dependencies
-        RET_VAR._evar__finish_operation()
-        return RET_VAR
-    else:
-        return np.exp(x)
-
-
-def sin(x):
-    if type(x) is evar:
-        RET_VAR = evar(name=&#34;INT_OP&#34;)
-        RET_VAR.value = np.sin(x.value)
-        RET_VAR.gauss_error = np.abs(x.gauss_error * np.cos(x.value))
-        RET_VAR.max_error = np.abs(x.max_error * np.cos(x.value))
-        RET_VAR._evar__expr = sympy.sin(x._evar__expr)
-        RET_VAR._evar__dependencies = x._evar__dependencies
-        RET_VAR._evar__finish_operation()
-        return RET_VAR
-    else:
-        return np.sin(x)
-
-
-def cos(x):
-    if type(x) is evar:
-        RET_VAR = evar(name=&#34;INT_OP&#34;)
-        RET_VAR.value = np.cos(x.value)
-        RET_VAR.gauss_error = np.abs(x.gauss_error * np.sin(x.value))
-        RET_VAR.max_error = np.abs(x.max_error * np.sin(x.value))
-        RET_VAR._evar__expr = sympy.cos(x._evar__expr)
-        RET_VAR._evar__dependencies = x._evar__dependencies
-        RET_VAR._evar__finish_operation()
-        return RET_VAR
-    else:
-        return np.cos(x)
-
-
-def sqrt(x):
-    if type(x) is evar:
-        return single_operator(sympy.sqrt, x)
-    else:
-        return np.sqrt(x)
-
-
-# TODO make these to real numpy expressions
-def sinh(x):
-    if type(x) is evar:
-        return single_operator(sympy.sinh, x)
-    else:
-        return np.sinh(x)
-
-
-def cosh(x):
-    if type(x) is evar:
-        return single_operator(sympy.cosh, x)
-    else:
-        return np.cosh(x)
-
-
-def atan(x):
-    if type(x) is evar:
-        return single_operator(sympy.atan, x)
-    else:
-        return np.arctan(x)
-
-
-def asin(x):
-    if type(x) is evar:
-        return single_operator(sympy.asin, x)
-    else:
-        return np.arcsin(x)
-
-
-def asinh(x):
-    if type(x) is evar:
-        return single_operator(sympy.asinh, x)
-    else:
-        return np.arcsinh(x)
-
-
-def acos(x):
-    if type(x) is evar:
-        return single_operator(sympy.acos, x)
-    else:
-        return np.arccos(x)
-
-
-def acosh(x):
-    if type(x) is evar:
-        return single_operator(sympy.acosh, x)
-    else:
-        return np.arccosh(x)</code></pre>
-</details>
+<p>Contains often used operators.</p>
+<h2 id="notes">Notes</h2>
+<p>a stands for arc.</p>
+<pre><code>asin=arcsin
+</code></pre>
 </section>
 <section>
 </section>
@@ -207,282 +40,132 @@ def acosh(x):
 </code></dt>
 <dd>
 <div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def acos(x):
-    if type(x) is evar:
-        return single_operator(sympy.acos, x)
-    else:
-        return np.arccos(x)</code></pre>
-</details>
 </dd>
 <dt id="error_analysis.operators.acosh"><code class="name flex">
 <span>def <span class="ident">acosh</span></span>(<span>x)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def acosh(x):
-    if type(x) is evar:
-        return single_operator(sympy.acosh, x)
-    else:
-        return np.arccosh(x)</code></pre>
-</details>
 </dd>
 <dt id="error_analysis.operators.asin"><code class="name flex">
 <span>def <span class="ident">asin</span></span>(<span>x)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def asin(x):
-    if type(x) is evar:
-        return single_operator(sympy.asin, x)
-    else:
-        return np.arcsin(x)</code></pre>
-</details>
 </dd>
 <dt id="error_analysis.operators.asinh"><code class="name flex">
 <span>def <span class="ident">asinh</span></span>(<span>x)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def asinh(x):
-    if type(x) is evar:
-        return single_operator(sympy.asinh, x)
-    else:
-        return np.arcsinh(x)</code></pre>
-</details>
 </dd>
 <dt id="error_analysis.operators.atan"><code class="name flex">
 <span>def <span class="ident">atan</span></span>(<span>x)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def atan(x):
-    if type(x) is evar:
-        return single_operator(sympy.atan, x)
-    else:
-        return np.arctan(x)</code></pre>
-</details>
 </dd>
 <dt id="error_analysis.operators.cos"><code class="name flex">
 <span>def <span class="ident">cos</span></span>(<span>x)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def cos(x):
-    if type(x) is evar:
-        RET_VAR = evar(name=&#34;INT_OP&#34;)
-        RET_VAR.value = np.cos(x.value)
-        RET_VAR.gauss_error = np.abs(x.gauss_error * np.sin(x.value))
-        RET_VAR.max_error = np.abs(x.max_error * np.sin(x.value))
-        RET_VAR._evar__expr = sympy.cos(x._evar__expr)
-        RET_VAR._evar__dependencies = x._evar__dependencies
-        RET_VAR._evar__finish_operation()
-        return RET_VAR
-    else:
-        return np.cos(x)</code></pre>
-</details>
 </dd>
 <dt id="error_analysis.operators.cosh"><code class="name flex">
 <span>def <span class="ident">cosh</span></span>(<span>x)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def cosh(x):
-    if type(x) is evar:
-        return single_operator(sympy.cosh, x)
-    else:
-        return np.cosh(x)</code></pre>
-</details>
 </dd>
 <dt id="error_analysis.operators.custom_operation"><code class="name flex">
 <span>def <span class="ident">custom_operation</span></span>(<span>expr, variables)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>:param expr: equation as string. all variables must be named v0&hellip; vi
-:param variables: the vi as var list
-:return:</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def custom_operation(expr, variables):
-    &#34;&#34;&#34;
-
-    :param expr: equation as string. all variables must be named v0... vi
-    :param variables: the vi as var list
-    :return:
-    &#34;&#34;&#34;
-    RET_VAR = evar(name=&#34;INT_OP&#34;)
-    dependencies = set()
-    expr = sympy.sympify(expr)
-    for i in range(len(variables)):
-        expr = expr.subs(&#34;v&#34; + str(i), variables[i].symbol)
-        dependencies.add(variables[i]._evar__id)
-    RET_VAR._evar__expr = expr
-    RET_VAR._evar__dependencies = dependencies
-    gauss_expr = tools.get_gauss_expr(expr, variables)
-    max_expr = tools.get_max_expr(expr, variables)
-    RET_VAR.value = tools.eval_e(expr, variables)
-    RET_VAR.max_error = tools.eval_m(max_expr, variables)
-    RET_VAR.gauss_error = tools.eval_g(gauss_expr, variables)
-    if type(RET_VAR.value) is list:
-        RET_VAR.value = np.array(RET_VAR.value)
-        RET_VAR.gauss_error = np.array(RET_VAR.gauss_error)
-        RET_VAR.max_error = np.array(RET_VAR.max_error)
-    RET_VAR._evar__finish_operation()
-    return RET_VAR</code></pre>
-</details>
+<div class="desc"><p>Alternative way to calculate entire expression.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning:&ensp;This can be several hundred times slower and crash the program</p>
+</div>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>expr</code></strong> :&ensp;<code>str</code></dt>
+<dd>equation as string. all variables must be named v0&hellip; vi</dd>
+<dt><strong><code>variables</code></strong> :&ensp;<code>list</code></dt>
+<dd>the vi as list of variables</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a title="error_analysis.evar.evar" href="evar.html#error_analysis.evar.evar">evar</a></code></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 id="examples">Examples</h2>
+<p>This</p>
+<pre><code>x = operators.custom_operation("cos(v0)*v1+v2", [a, d, f])
+</code></pre>
+<p>is equal to::</p>
+<pre><code>x=cos(a)*d+f
+</code></pre>
+<h2 id="notes">Notes</h2>
+<p>Values may vary from native evar calculations at high precision.</p></div>
 </dd>
 <dt id="error_analysis.operators.exp"><code class="name flex">
 <span>def <span class="ident">exp</span></span>(<span>x)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def exp(x):
-    if type(x) is evar:
-        RET_VAR = evar(name=&#34;INT_OP&#34;)
-        RET_VAR.value = np.exp(x.value)
-        RET_VAR.gauss_error = np.exp(x.value) * np.abs(x.gauss_error)
-        RET_VAR.max_error = np.exp(x.value) * np.abs(x.max_error)
-        RET_VAR._evar__expr = sympy.exp(x._evar__expr)
-        RET_VAR._evar__dependencies = x._evar__dependencies
-        RET_VAR._evar__finish_operation()
-        return RET_VAR
-    else:
-        return np.exp(x)</code></pre>
-</details>
 </dd>
 <dt id="error_analysis.operators.log"><code class="name flex">
 <span>def <span class="ident">log</span></span>(<span>x)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def log(x):
-    if type(x) is evar:
-        RET_VAR = evar(name=&#34;INT_OP&#34;)
-        RET_VAR.value = np.log(x.value)
-        RET_VAR.gauss_error = np.abs(x.gauss_error / x.value)
-        RET_VAR.max_error = np.abs(x.max_error / x.value)
-        RET_VAR._evar__expr = sympy.log(x._evar__expr)
-        RET_VAR._evar__dependencies = x._evar__dependencies
-        RET_VAR._evar__finish_operation()
-        return RET_VAR
-    else:
-        return np.log(x)</code></pre>
-</details>
 </dd>
 <dt id="error_analysis.operators.sin"><code class="name flex">
 <span>def <span class="ident">sin</span></span>(<span>x)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def sin(x):
-    if type(x) is evar:
-        RET_VAR = evar(name=&#34;INT_OP&#34;)
-        RET_VAR.value = np.sin(x.value)
-        RET_VAR.gauss_error = np.abs(x.gauss_error * np.cos(x.value))
-        RET_VAR.max_error = np.abs(x.max_error * np.cos(x.value))
-        RET_VAR._evar__expr = sympy.sin(x._evar__expr)
-        RET_VAR._evar__dependencies = x._evar__dependencies
-        RET_VAR._evar__finish_operation()
-        return RET_VAR
-    else:
-        return np.sin(x)</code></pre>
-</details>
 </dd>
 <dt id="error_analysis.operators.single_operator"><code class="name flex">
 <span>def <span class="ident">single_operator</span></span>(<span>expr, x)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def single_operator(expr, x):
-    RET_VAR = evar(name=&#34;INT_OP&#34;)
-    RET_VAR._evar__dependencies = x._evar__dependencies
-    RET_VAR._evar__expr = expr(x._evar__expr)
-    evalf = sympy.lambdify(op_var, expr(op_var))
-    RET_VAR.value = evalf(x.value)
-    error_expr = abs(expr(op_var).diff(op_var) * op_var_e)
-    evale = sympy.lambdify([op_var, op_var_e], error_expr)
-    RET_VAR.gauss_error = evale(x.value, x.gauss_error)
-    RET_VAR.max_error = evale(x.value, x.max_error)
-    RET_VAR._evar__finish_operation()
-    return RET_VAR</code></pre>
-</details>
+<div class="desc"><h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>expr</code></strong></dt>
+<dd>function pointer to sympy operator</dd>
+<dt><strong><code>x</code></strong></dt>
+<dd>variable to which this should be applied</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a title="error_analysis.evar.evar" href="evar.html#error_analysis.evar.evar">evar</a></code></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 id="examples">Examples</h2>
+<p>This is the current implementation of cosh</p>
+<pre><code>if type(x) is evar:
+    return single_operator(sympy.acosh, x)
+else:
+    return np.arccosh(x)
+</code></pre>
+<h2 id="notes">Notes</h2>
+<p>Operators can be found at <a href="https://docs.sympy.org/latest/modules/functions/index.html">https://docs.sympy.org/latest/modules/functions/index.html</a> .
+While being very slow (about 100-200 times compared to native), this can be helpful if a required operator is not implemented yet.
+Also if you see values that you deem unrealistic, there is a possibility that you've
+encountered a bug. Since this runs completely independent of the normal mechanism of evar you can check the
+results with this.</p></div>
 </dd>
 <dt id="error_analysis.operators.sinh"><code class="name flex">
 <span>def <span class="ident">sinh</span></span>(<span>x)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def sinh(x):
-    if type(x) is evar:
-        return single_operator(sympy.sinh, x)
-    else:
-        return np.sinh(x)</code></pre>
-</details>
 </dd>
 <dt id="error_analysis.operators.sqrt"><code class="name flex">
 <span>def <span class="ident">sqrt</span></span>(<span>x)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def sqrt(x):
-    if type(x) is evar:
-        return single_operator(sympy.sqrt, x)
-    else:
-        return np.sqrt(x)</code></pre>
-</details>
 </dd>
 </dl>
 </section>
@@ -492,7 +175,9 @@ def acosh(x):
 <nav id="sidebar">
 <h1>Index</h1>
 <div class="toc">
-<ul></ul>
+<ul>
+<li><a href="#notes">Notes</a></li>
+</ul>
 </div>
 <ul id="index">
 <li><h3>Super-module</h3>
