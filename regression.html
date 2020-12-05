@@ -32,7 +32,7 @@
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="error_analysis.regression.lin_reg"><code class="name flex">
-<span>def <span class="ident">lin_reg</span></span>(<span>x, y, error_mode=3)</span>
+<span>def <span class="ident">lin_reg</span></span>(<span>x, y, p0=None, error_mode=3)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Shortcut for linear regression</p>
@@ -53,7 +53,7 @@
 <dl>
 <dt id="error_analysis.regression.Regression"><code class="flex name class">
 <span>class <span class="ident">Regression</span></span>
-<span>(</span><span>func, x, y, error_mode=3)</span>
+<span>(</span><span>func, x, y, p0=None, error_mode=3)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>evar wrapper for scipy.curve_fit. Also works on normals lists.</p>
@@ -74,7 +74,9 @@ m, b = reg.func_args[0], reg.func_args[1]
 <dd>x values</dd>
 <dt><strong><code>y</code></strong> :&ensp;<code>list</code> or <code><a title="error_analysis.evar.evar" href="evar.html#error_analysis.evar.evar">evar</a></code></dt>
 <dd>y values</dd>
-<dt><strong><code>error_mode</code></strong> :&ensp;<code><a title="error_analysis.evar.ErrorMode" href="evar.html#error_analysis.evar.ErrorMode">ErrorMode</a></code></dt>
+<dt><strong><code>p0</code></strong> :&ensp;<code>list</code>, optional</dt>
+<dd>Initial guess for the parameters</dd>
+<dt><strong><code>error_mode</code></strong> :&ensp;<code><a title="error_analysis.evar.ErrorMode" href="evar.html#error_analysis.evar.ErrorMode">ErrorMode</a></code>, optional</dt>
 <dd>Which error is considered in regression. ErrorMode.BOTH is not supported</dd>
 </dl></div>
 <h3>Instance variables</h3>

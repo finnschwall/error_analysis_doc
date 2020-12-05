@@ -37,19 +37,31 @@ If nothing is specified the assumed value will be options.as_latex.</p>
 <dd>
 <div class="desc"><p>wether string will be returned in more console friendly format or for latex parsing</p></div>
 </dd>
+<dt id="error_analysis.options.correct_garbage_collection"><code class="name">var <span class="ident">correct_garbage_collection</span></code></dt>
+<dd>
+<div class="desc"><p>Decides wether to delete out of scope objects. </p>
+<p>Working with library is far less error prone without correct gc. However correct gc massively improves memory usage.
+Examples</p>
+<hr>
+<p>If True this</p>
+<pre><code> a= evar(..)*10
+ print(a.get_expr())
+</code></pre>
+<p>will fail.
+However this</p>
+<pre><code>a=evar(..)
+a*=10
+print(a.get_expr())
+</code></pre>
+<p>will not. All functions which retrieve expressions will have to resolve their dependencies.
+In the first case the expression for a will be a = UnnamedVariable*10. Since UnnamedVariable has no direct reference
+anymore, it will be deleted. In the second case, as still has an exisiting reference and won't be deleted.</p></div>
+</dd>
 <dt id="error_analysis.options.error_mode"><code class="name">var <span class="ident">error_mode</span></code></dt>
 <dd>
 <div class="desc"><p>Specify how error output works. Does not effect calculations. </p>
 <h2 id="see-also">See Also</h2>
 <p><code><a title="error_analysis.evar.ErrorMode" href="evar.html#error_analysis.evar.ErrorMode">ErrorMode</a></code></p></div>
-</dd>
-<dt id="error_analysis.options.fast_mode"><code class="name">var <span class="ident">fast_mode</span></code></dt>
-<dd>
-<div class="desc"><p>Ignore expressions and just calculate. Significantly faster but doesn't allow
-printing of gauss max or own expression.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning:&ensp;not working yet</p>
-</div></div>
 </dd>
 <dt id="error_analysis.options.gauss_error_name"><code class="name">var <span class="ident">gauss_error_name</span></code></dt>
 <dd>
@@ -102,10 +114,10 @@ Some simplifcations like </p>
 </ul>
 </li>
 <li><h3><a href="#header-variables">Global variables</a></h3>
-<ul class="two-column">
+<ul class="">
 <li><code><a title="error_analysis.options.as_latex" href="#error_analysis.options.as_latex">as_latex</a></code></li>
+<li><code><a title="error_analysis.options.correct_garbage_collection" href="#error_analysis.options.correct_garbage_collection">correct_garbage_collection</a></code></li>
 <li><code><a title="error_analysis.options.error_mode" href="#error_analysis.options.error_mode">error_mode</a></code></li>
-<li><code><a title="error_analysis.options.fast_mode" href="#error_analysis.options.fast_mode">fast_mode</a></code></li>
 <li><code><a title="error_analysis.options.gauss_error_name" href="#error_analysis.options.gauss_error_name">gauss_error_name</a></code></li>
 <li><code><a title="error_analysis.options.max_digits" href="#error_analysis.options.max_digits">max_digits</a></code></li>
 <li><code><a title="error_analysis.options.max_error_name" href="#error_analysis.options.max_error_name">max_error_name</a></code></li>
